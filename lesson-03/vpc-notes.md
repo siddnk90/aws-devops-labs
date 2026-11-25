@@ -19,3 +19,12 @@
 - Security Groups vs Network ACLs
 - NAT Gateway for outbound access from private subnets
 - Launch an EC2 instance in a public subnet and connect with SSH
+
+## Security Groups vs Network ACLs
+- Security Group: instance level, stateful, allow rules only
+- NACL: subnet level, stateless, allow and deny rules, evaluated by rule number
+- Because NACLs are stateless, return traffic needs an explicit rule (ephemeral ports 1024-65535)
+- Created sidd-web-sg: SSH from my IP, HTTP from anywhere
+- Created sidd-db-sg: MySQL (3306) allowed only from sidd-web-sg (security group reference)
+- Created sidd-public-nacl with explicit allow rules; not yet associated with a subnet
+- Never open SSH to 0.0.0.0/0
